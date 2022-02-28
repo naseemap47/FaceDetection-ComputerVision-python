@@ -30,7 +30,13 @@ while True:
                         int(bound_box_class.height * img_height)
             cv2.rectangle(
                 img, bound_box,
-                (255, 0, 255), 2
+                (0, 255, 0), 1
+            )
+            cv2.putText(
+                img, f'{int(detect.score[0] * 100)}%',
+                (bound_box[0], bound_box[1] - 20),
+                cv2.FONT_HERSHEY_PLAIN, 2,
+                (0,255,0), 1
             )
 
     c_time = time.time()
