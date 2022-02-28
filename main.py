@@ -8,6 +8,7 @@ mp_face_detect = mp.solutions.face_detection
 face_detect = mp_face_detect.FaceDetection()
 
 mp_draw = mp.solutions.drawing_utils
+p_time = 0
 
 while True:
     success, img = cap.read()
@@ -31,6 +32,16 @@ while True:
                 img, bound_box,
                 (255, 0, 255), 2
             )
+
+    c_time = time.time()
+    fps = 1 / (c_time - p_time)
+    p_time = c_time
+
+    cv2.putText(
+        img, f'FPS: {int(fps)}', (10,60),
+        cv2.FONT_HERSHEY_PLAIN, 2,
+        (255,0,0), 2
+    )        
 
     cv2.imshow("Image", img)
     cv2.waitKey(1)
